@@ -8,6 +8,87 @@ import (
 )
 
 
+func mergeSort_rec(intArray []int, p int, r int) {
+	if (p < r){
+        var q = (p+r)/2
+	    mergeSort_rec(intArray, p, q)
+	    mergeSort_rec(intArray, q+1, r)
+	    merge(intArray, p, q, r)
+	}
+
+
+}
+
+func merge(intArray []int, p int, q int, r int){
+	var i=0;
+	var j=0;
+	var k=0;
+
+	intArray_Support:=make([]int, len(intArray))
+
+	i=p;
+	j=q+1;
+
+	for {
+        if !(i<=q && j<=r) {
+                break
+        }
+        if intArray[i]<intArray[j] {
+			intArray_Support[k]=intArray[i];
+			i++;
+		} else{
+			intArray_Support[k]=intArray[j];
+			j++;
+		}
+		k++;
+	}
+
+
+	for {
+		if !(i<=q) {
+            break
+        }
+		intArray_Support[k]=intArray[i];
+		i++;
+		k++;
+	}
+
+
+	for {
+		if !(j<=r) {
+            break
+        }
+		intArray_Support[k]=intArray[j];
+		j++;
+		k++;
+	}
+
+	for k=p;k<=r;k++ {
+		intArray[k]=intArray_Support[k-p];
+	}
+
+}
+
+func mergeSort(intlist *list.List) {
+	intArray:=make([]int, intlist.Len()) 
+	var i=0
+
+	for e := intlist.Front(); e != nil; e = e.Next() {
+		intArray[i]=e.Value.(int)
+		i=i+1
+   	}
+
+	mergeSort_rec(intArray, 0, len(intArray)-1)
+
+	intlist.Init()
+
+	for i := 0; i < len(intArray); i++ {
+		intlist.PushBack(intArray[i])
+	}
+}
+
+
+
 
 func selectionSort(intlist *list.List) {
 	intArray:=make([]int, intlist.Len()) 
@@ -123,6 +204,21 @@ func main() {
 
 	fmt.Println("\nSto ordinando i valori con il selection sort...")
 	selectionSort(intlist)
+
+	printList(intlist)
+
+	fmt.Println()
+	intlist.Init()
+
+	fmt.Println("\nGenero 5 numeri casuali...")
+
+	for i := 0; i < 5; i++ {
+		intlist.PushFront(rand.Intn(100))
+	}
+	printList(intlist)
+
+	fmt.Println("\nSto ordinando i valori con il merge sort...")
+	mergeSort(intlist)
 
 	printList(intlist)
 
