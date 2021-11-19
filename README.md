@@ -5,3 +5,4 @@ Currently available (_int list_ as parameter)
 - **STUPID SORT**
 - **SELECTION SORT**
 - **MERGE SORT**
+- **BUBBLE SORT**
