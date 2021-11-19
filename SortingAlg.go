@@ -19,6 +19,33 @@ func mergeSort_rec(intArray []int, p int, r int) {
 
 }
 
+func bubbleSort(intlist *list.List) {
+	intArray:=make([]int, intlist.Len()) 
+	var i=0
+
+   for e := intlist.Front(); e != nil; e = e.Next() {
+	intArray[i]=e.Value.(int)
+	i=i+1
+   }
+
+	
+	for i := len(intArray)-1; i >=0; i-- {
+		for j := 0; j < i; j++ {
+			if(intArray[j]>intArray[j+1]){
+				var tmp=intArray[j+1]
+				intArray[j+1]=intArray[j]
+				intArray[j]=tmp
+			}
+		}
+	}
+
+	intlist.Init()
+
+	for i := 0; i < len(intArray); i++ {
+		intlist.PushBack(intArray[i])
+	}
+}
+
 func merge(intArray []int, p int, q int, r int){
 	var i=0;
 	var j=0;
@@ -219,6 +246,21 @@ func main() {
 
 	fmt.Println("\nSto ordinando i valori con il merge sort...")
 	mergeSort(intlist)
+
+	printList(intlist)
+
+	fmt.Println()
+	intlist.Init()
+
+	fmt.Println("\nGenero 5 numeri casuali...")
+
+	for i := 0; i < 5; i++ {
+		intlist.PushFront(rand.Intn(100))
+	}
+	printList(intlist)
+
+	fmt.Println("\nSto ordinando i valori con il bubble sort...")
+	bubbleSort(intlist)
 
 	printList(intlist)
 
