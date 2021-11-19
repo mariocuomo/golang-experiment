@@ -4,3 +4,4 @@ The goal of this repository is to experiment with the **Golang** language and cr
 Currently available (_int list_ as parameter)
 - **STUPID SORT**
 - **SELECTION SORT**
+- **MERGE SORT**
