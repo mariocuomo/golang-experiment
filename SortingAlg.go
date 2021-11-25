@@ -356,7 +356,7 @@ func main() {
 	fmt.Println("Hello!\nThis program is developed using GoLang!\n")
 	intlist := list.New()
 
-	fmt.Println("I am generating 5 random number...")
+	fmt.Println("I am generating 5 random numbers...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
@@ -374,7 +374,7 @@ func main() {
 	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("I am generating 5 random number...")
+	fmt.Println("I am generating 5 random numbers...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
@@ -389,7 +389,7 @@ func main() {
 	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("I am generating 5 random number...")
+	fmt.Println("I am generating 5 random numbers...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
@@ -404,7 +404,7 @@ func main() {
 	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("I am generating 5 random number...")
+	fmt.Println("I am generating 5 random numbers...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
@@ -419,7 +419,7 @@ func main() {
 	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("I am generating 5 random number...")
+	fmt.Println("I am generating 5 random numbers...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
