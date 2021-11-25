@@ -7,15 +7,17 @@ import (
     "container/list"
 )
 
-
-
 type Node struct {
 	value    int
 	left     *Node
 	right     *Node
 }
 
-
+/*
+=================================
+          TREE SORT
+=================================
+*/
 func treeSort(intlist *list.List) {
 	intArray:=make([]int, intlist.Len()) 
 	var i=0
@@ -124,17 +126,12 @@ func visitTree(btree *Node) []int{
 }
 
 
-func mergeSort_rec(intArray []int, p int, r int) {
-	if (p < r){
-        var q = (p+r)/2
-	    mergeSort_rec(intArray, p, q)
-	    mergeSort_rec(intArray, q+1, r)
-	    merge(intArray, p, q, r)
-	}
 
-
-}
-
+/*
+=================================
+           BUBBLE SORT
+=================================
+*/
 func bubbleSort(intlist *list.List) {
 	intArray:=make([]int, intlist.Len()) 
 	var i=0
@@ -159,6 +156,40 @@ func bubbleSort(intlist *list.List) {
 
 	for i := 0; i < len(intArray); i++ {
 		intlist.PushBack(intArray[i])
+	}
+}
+
+
+
+/*
+=================================
+           MERGE SORT
+=================================
+*/
+func mergeSort(intlist *list.List) {
+	intArray:=make([]int, intlist.Len()) 
+	var i=0
+
+	for e := intlist.Front(); e != nil; e = e.Next() {
+		intArray[i]=e.Value.(int)
+		i=i+1
+   	}
+
+	mergeSort_rec(intArray, 0, len(intArray)-1)
+
+	intlist.Init()
+
+	for i := 0; i < len(intArray); i++ {
+		intlist.PushBack(intArray[i])
+	}
+}
+
+func mergeSort_rec(intArray []int, p int, r int) {
+	if (p < r){
+        var q = (p+r)/2
+	    mergeSort_rec(intArray, p, q)
+	    mergeSort_rec(intArray, q+1, r)
+	    merge(intArray, p, q, r)
 	}
 }
 
@@ -209,30 +240,15 @@ func merge(intArray []int, p int, q int, r int){
 	for k=p;k<=r;k++ {
 		intArray[k]=intArray_Support[k-p];
 	}
-
-}
-
-func mergeSort(intlist *list.List) {
-	intArray:=make([]int, intlist.Len()) 
-	var i=0
-
-	for e := intlist.Front(); e != nil; e = e.Next() {
-		intArray[i]=e.Value.(int)
-		i=i+1
-   	}
-
-	mergeSort_rec(intArray, 0, len(intArray)-1)
-
-	intlist.Init()
-
-	for i := 0; i < len(intArray); i++ {
-		intlist.PushBack(intArray[i])
-	}
 }
 
 
 
-
+/*
+=================================
+        SELECTION SORT
+=================================
+*/
 func selectionSort(intlist *list.List) {
 	intArray:=make([]int, intlist.Len()) 
 	var i=0
@@ -264,6 +280,12 @@ func selectionSort(intlist *list.List) {
 }
 
 
+
+/*
+=================================
+           STUPID SORT
+=================================
+*/
 func stupidSort(intlist *list.List) {
 	intArray:=make([]int, intlist.Len()) 
 	var i=0
@@ -291,6 +313,20 @@ func stupidSort(intlist *list.List) {
 
 }
 
+
+
+/*
+=================================
+         SUPPORT FUNCTIONS
+=================================
+*/
+func printList(intlist *list.List){
+	for e := intlist.Front(); e != nil; e = e.Next() {
+		fmt.Print(e.Value)
+		fmt.Print(" ")
+	   }
+}
+
 func isSorted(intArray []int,sizes int) bool{
 	var sorted bool
 
@@ -306,21 +342,21 @@ func isSorted(intArray []int,sizes int) bool{
 	
 }
 
-func printList(intlist *list.List){
-	for e := intlist.Front(); e != nil; e = e.Next() {
-		fmt.Print(e.Value)
-		fmt.Print(" ")
-	   }
-}
 
+
+/*
+================================
+          MAIN FUNCTION
+================================
+*/
 
 func main() {
     rand.Seed(time.Now().UTC().UnixNano())
 
-	fmt.Println("Ciao!\nQuesto programma è sviluppato con GoLang\n")
+	fmt.Println("Hello!\nThis program is developed using GoLang!\n")
 	intlist := list.New()
 
-	fmt.Println("Genero 5 numeri casuali...")
+	fmt.Println("I am generating 5 random number...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
@@ -329,70 +365,73 @@ func main() {
 	fmt.Print()
 
    	printList(intlist)
-	fmt.Println("\nSto ordinando i valori con lo stupid sort...")
+	fmt.Println("\nI'm sorting them using stupid sort...")
 
 	stupidSort(intlist)
 
 	printList(intlist)
 
-	fmt.Println()
+	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("\nGenero 5 numeri casuali...")
+	fmt.Println("I am generating 5 random number...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
 	}
 	printList(intlist)
 
-	fmt.Println("\nSto ordinando i valori con il selection sort...")
+	fmt.Println("\nI'm sorting them using selection sort...")
 	selectionSort(intlist)
 
 	printList(intlist)
 
-	fmt.Println()
+	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("\nGenero 5 numeri casuali...")
+	fmt.Println("I am generating 5 random number...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
 	}
 	printList(intlist)
 
-	fmt.Println("\nSto ordinando i valori con il merge sort...")
+	fmt.Println("\nI'm sorting them using merge sort...")
 	mergeSort(intlist)
 
 	printList(intlist)
 
-	fmt.Println()
+	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("\nGenero 5 numeri casuali...")
+	fmt.Println("I am generating 5 random number...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
 	}
 	printList(intlist)
 
-	fmt.Println("\nSto ordinando i valori con il bubble sort...")
+	fmt.Println("\nI'm sorting them using bubble sort...")
 	bubbleSort(intlist)
 
 	printList(intlist)
 
-	fmt.Println()
+	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("\nGenero 5 numeri casuali...")
+	fmt.Println("I am generating 5 random number...")
 
 	for i := 0; i < 5; i++ {
 		intlist.PushFront(rand.Intn(100))
 	}
 	printList(intlist)
 
-	fmt.Println("\nSto ordinando i valori con il tree sort...")
+	fmt.Println("\nI'm sorting them using tree sort...")
 	treeSort(intlist)
 
 	printList(intlist)
+
+	fmt.Println("\n")
+	intlist.Init()
 
 }
