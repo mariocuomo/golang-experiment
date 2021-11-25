@@ -1,5 +1,5 @@
 # Golang Experiment
-The goal of this repository is to experiment with the **Golang** language and create a library of **sorting algorithms**.
+The goal of this repository is to experiment with **GoLang** and - why not? - to create a library of **sorting** algorithms. 
 
 Currently available (_int list_ as parameter)
 - **STUPID SORT**
