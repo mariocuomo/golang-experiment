@@ -8,6 +8,122 @@ import (
 )
 
 
+
+type Node struct {
+	value    int
+	left     *Node
+	right     *Node
+}
+
+
+func treeSort(intlist *list.List) {
+	intArray:=make([]int, intlist.Len()) 
+	var i=0
+
+	for e := intlist.Front(); e != nil; e = e.Next() {
+		intArray[i]=e.Value.(int)
+		i=i+1
+	}
+
+
+	btree := Node{
+        value: intArray[0],
+        left:    nil,
+        right:    nil,
+    }
+
+
+
+    for i := 1; i < len(intArray); i++ {
+		tmp := (&btree) 
+		for {
+			if (intArray[i] < (tmp).value){
+				if(tmp.left!=nil){
+					tmp=tmp.left
+				}else{
+					node := Node{
+				        value: intArray[i],
+				        left:    nil,
+				        right:    nil,
+				    }
+				    tmp.left=&node
+				    break
+				}
+			}else{
+				if(tmp.right!=nil){
+					tmp=tmp.right
+				}else{
+					node := Node{
+				        value: intArray[i],
+				        left:    nil,
+				        right:    nil,
+				    }
+				    tmp.right=&node
+				    break
+				}
+			}
+	        
+		}
+	}
+
+	intArray=visitTree(&btree)
+
+	intlist.Init()
+
+	for i := 0; i < len(intArray); i++ {
+		intlist.PushBack(intArray[i])
+	}
+}
+
+func visitTree(btree *Node) []int{
+	if(btree==nil){
+		ll:= make([]int, 1)
+		return ll
+	}
+
+	if(btree.left==nil && btree.right==nil){
+		ll:= make([]int, 1)
+		ll[0]=btree.value
+		return ll
+	}
+
+	if(btree.left==nil){
+		ll:= make([]int, 1)
+		ll[0]=btree.value
+
+		right := visitTree(btree.right)
+		var result = make([]int, 1 + len(right))
+
+ 		copy(result[1:], right[:])
+		result[0]=ll[0]
+
+		return result
+	}
+
+	if(btree.right==nil){
+		ll:= make([]int, 1)
+		ll[0]=btree.value
+
+		left := visitTree(btree.left)
+		var result = make([]int, 1 + len(left))
+
+ 		copy(result[:], left[:])
+		result[len(result)-1]=ll[0]
+
+		return result
+	}
+
+	left := visitTree(btree.left)
+	right := visitTree(btree.right)	
+ 	var result = make([]int, len(left) + len(right) + 1)
+ 	copy(result[:], left[:])
+ 	result[len(left)]=btree.value
+	copy(result[len(left)+1:], right[:])
+
+	return result
+}
+
+
 func mergeSort_rec(intArray []int, p int, r int) {
 	if (p < r){
         var q = (p+r)/2
@@ -261,6 +377,21 @@ func main() {
 
 	fmt.Println("\nSto ordinando i valori con il bubble sort...")
 	bubbleSort(intlist)
+
+	printList(intlist)
+
+	fmt.Println()
+	intlist.Init()
+
+	fmt.Println("\nGenero 5 numeri casuali...")
+
+	for i := 0; i < 5; i++ {
+		intlist.PushFront(rand.Intn(100))
+	}
+	printList(intlist)
+
+	fmt.Println("\nSto ordinando i valori con il tree sort...")
+	treeSort(intlist)
 
 	printList(intlist)
 
