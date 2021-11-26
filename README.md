@@ -7,6 +7,7 @@ Currently available (_int list_ as parameter)
 - **MERGE SORT**
 - **BUBBLE SORT**
 - **TREE SORT**
+- **COUNTING SORT**
 
 <p align="center">
   <img src="https://github.com/mariocuomo/golang-experiment/blob/main/go.jpg" width="600px">

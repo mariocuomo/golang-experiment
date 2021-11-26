@@ -126,6 +126,58 @@ func visitTree(btree *Node) []int{
 }
 
 
+/*
+=================================
+          COUNTING SORT
+=================================
+*/
+func countingSort(intlist *list.List) {
+	intArray:=make([]int, intlist.Len()) 
+	var i=0
+	var max=intlist.Front().Value.(int)
+	var min=intlist.Front().Value.(int)
+
+   for e := intlist.Front(); e != nil; e = e.Next() {
+	intArray[i]=e.Value.(int)
+	if (intArray[i]>max){
+		max=intArray[i]
+	}
+	if (intArray[i]<min){
+		min=intArray[i]
+	}
+	i=i+1
+   }
+
+   if(min<0){
+   	min=min*(-1)
+   }
+
+	countingArray:=make([]int, max+min+1) 
+
+	for i := 0; i <len(intArray); i++ {
+		countingArray[intArray[i]+min]=countingArray[intArray[i]+min]+1
+	}
+
+	var j=0
+	for i := 0; i <len(countingArray); i++ {
+		if(countingArray[i]!=0){
+			var times=countingArray[i]
+			for k := 0; k<times;k++{
+				intArray[j]=i-min
+				j=j+1
+			}
+		}
+		
+	}
+
+
+	intlist.Init()
+
+	for i := 0; i < len(intArray); i++ {
+		intlist.PushBack(intArray[i])
+	}
+}
+
 
 /*
 =================================
@@ -428,6 +480,21 @@ func main() {
 
 	fmt.Println("\nI'm sorting them using tree sort...")
 	treeSort(intlist)
+
+	printList(intlist)
+
+	fmt.Println("\n")
+	intlist.Init()
+
+	fmt.Println("I am generating 5 random numbers...")
+
+	for i := 0; i < 5; i++ {
+		intlist.PushFront(rand.Intn(100))
+	}
+	printList(intlist)
+
+	fmt.Println("\nI'm sorting them using counting sort...")
+	countingSort(intlist)
 
 	printList(intlist)
 
