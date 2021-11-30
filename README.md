@@ -4,6 +4,7 @@ The goal of this repository is to experiment with **GoLang** and - why not? - to
 Currently available (_int list_ as parameter)
 - **STUPID SORT**
 - **SELECTION SORT**
+- **INSERTION SORT**
 - **MERGE SORT**
 - **BUBBLE SORT**
 - **TREE SORT**

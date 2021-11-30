@@ -212,6 +212,39 @@ func bubbleSort(intlist *list.List) {
 }
 
 
+/*
+=================================
+           INSERTION SORT
+=================================
+*/
+func insertionSort(intlist *list.List) {
+	intArray:=make([]int, intlist.Len()) 
+	var i=0
+
+   for e := intlist.Front(); e != nil; e = e.Next() {
+	intArray[i]=e.Value.(int)
+	i=i+1
+   }
+
+	
+	for i := 0; i <len(intArray)-1; i++ {
+		for j := i+1; j > 0; j-- {
+			if(intArray[j]<intArray[j-1]){
+				var tmp = intArray[j]
+				intArray[j]=intArray[j-1]
+				intArray[j-1]=tmp
+			}
+		}
+	}
+
+	intlist.Init()
+
+	for i := 0; i < len(intArray); i++ {
+		intlist.PushBack(intArray[i])
+	}
+}
+
+
 
 /*
 =================================
@@ -379,6 +412,13 @@ func printList(intlist *list.List){
 	   }
 }
 
+func printArray(intArray []int,sizes int){
+	for i := 0; i < sizes; i++ {
+		fmt.Print(intArray[i])
+		fmt.Print(" ")
+	}
+}
+
 func isSorted(intArray []int,sizes int) bool{
 	var sorted bool
 
@@ -500,5 +540,19 @@ func main() {
 
 	fmt.Println("\n")
 	intlist.Init()
+
+	fmt.Println("I am generating 5 random numbers...")
+
+	for i := 0; i < 5; i++ {
+		intlist.PushFront(rand.Intn(100))
+	}
+	printList(intlist)
+
+	fmt.Println("\nI'm sorting them using insertion sort...")
+	insertionSort(intlist)
+
+	printList(intlist)
+
+	fmt.Println("\n")
 
 }
