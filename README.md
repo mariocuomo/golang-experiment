@@ -17,5 +17,5 @@ Currently available (_int list_ as parameter)
 
 
 <p align="center">
-  <img src="https://github.com/mariocuomo/golang-experiment/blob/main/stats.png" width="600px">
+  <img src="https://github.com/mariocuomo/golang-experiment/blob/main/stats.png">
 </p>
