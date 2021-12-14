@@ -344,8 +344,7 @@ func merge(intArray []int, p int, q int, r int){
 	var i=0;
 	var j=0;
 	var k=0;
-
-	intArray_Support:=make([]int, len(intArray))
+	intArray_Support:=make([]int, len(intArray)-p)
 
 	i=p;
 	j=q+1;
