@@ -10,7 +10,7 @@ Currently available (_int list_ as parameter)
 - **BUCKET SORT**
 - **COUNTING SORT**
 - **INSERTION SORT**
-- **MERGE SORT**
+- **MERGE SORT** (only recursive version)
 - **SELECTION SORT**
 - **STUPID SORT**
 - **TREE SORT**
