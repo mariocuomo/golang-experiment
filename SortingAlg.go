@@ -13,6 +13,7 @@ type Node struct {
 	right     *Node
 }
 
+
 /*
 =================================
           TREE SORT
@@ -176,6 +177,63 @@ func countingSort(intlist *list.List) {
 	for i := 0; i < len(intArray); i++ {
 		intlist.PushBack(intArray[i])
 	}
+}
+
+/*
+=================================
+          BUCKET SORT
+=================================
+*/
+func bucketSort(intlist *list.List) {
+	intArray:=make([]int, intlist.Len()) 
+	var i=0
+	var max=intlist.Front().Value.(int)
+	var min=intlist.Front().Value.(int)
+
+   for e := intlist.Front(); e != nil; e = e.Next() {
+		intArray[i]=e.Value.(int)
+		if (intArray[i]>max){
+			max=intArray[i]
+		}
+		if (intArray[i]<min){
+			min=intArray[i]
+		}
+		i=i+1
+   }
+
+   if(min<0){
+   	min=min*(-1)
+   }
+
+	bucketArray:=make([]*list.List, max+min+1)
+
+
+	
+	for i := 0; i <len(intArray); i++ {
+		if(bucketArray[intArray[i]+min] == nil){
+			bucketArray[intArray[i]+min]=list.New()
+		}
+		bucketArray[intArray[i]+min].PushFront(intArray[i])
+	}
+
+	
+	var j=0
+	for i := 0; i <len(bucketArray); i++ {
+		if(bucketArray[i]!=nil){
+			for e := bucketArray[i].Front(); e != nil; e = e.Next() {
+				intArray[j]=e.Value.(int)
+				j=j+1
+   			}
+		}
+	}
+
+	intlist.Init()
+	
+
+	for i := 0; i < len(intArray); i++ {
+		intlist.PushBack(intArray[i])
+	}
+	
 }
 
 
@@ -550,6 +608,21 @@ func main() {
 
 	fmt.Println("\nI'm sorting them using insertion sort...")
 	insertionSort(intlist)
+
+	printList(intlist)
+
+	fmt.Println("\n")
+	intlist.Init()
+
+	fmt.Println("I am generating 5 random numbers...")
+
+	for i := 0; i < 5; i++ {
+		intlist.PushFront(rand.Intn(100))
+	}
+	printList(intlist)
+
+	fmt.Println("\nI'm sorting them using bucket sort...")
+	bucketSort(intlist)
 
 	printList(intlist)
 
