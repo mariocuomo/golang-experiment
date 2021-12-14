@@ -13,6 +13,10 @@ type Node struct {
 	right     *Node
 }
 
+type Pair struct {
+    method string
+    time int64
+}
 
 /*
 =================================
@@ -518,114 +522,241 @@ func main() {
 	fmt.Println("\nI'm sorting them using stupid sort...")
 
 	stupidSort(intlist)
-
 	printList(intlist)
 
 	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("I am generating 5 random numbers...")
+	fmt.Println("I am generating 10 random numbers...")
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		intlist.PushFront(rand.Intn(100))
 	}
 	printList(intlist)
 
 	fmt.Println("\nI'm sorting them using selection sort...")
 	selectionSort(intlist)
-
 	printList(intlist)
 
 	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("I am generating 5 random numbers...")
+	fmt.Println("I am generating 100 random numbers...")
 
-	for i := 0; i < 5; i++ {
-		intlist.PushFront(rand.Intn(100))
-	}
-	printList(intlist)
-
-	fmt.Println("\nI'm sorting them using merge sort...")
-	mergeSort(intlist)
-
-	printList(intlist)
-
-	fmt.Println("\n")
-	intlist.Init()
-
-	fmt.Println("I am generating 5 random numbers...")
-
-	for i := 0; i < 5; i++ {
-		intlist.PushFront(rand.Intn(100))
-	}
-	printList(intlist)
-
-	fmt.Println("\nI'm sorting them using bubble sort...")
-	bubbleSort(intlist)
-
-	printList(intlist)
-
-	fmt.Println("\n")
-	intlist.Init()
-
-	fmt.Println("I am generating 5 random numbers...")
-
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		intlist.PushFront(rand.Intn(100))
 	}
 	printList(intlist)
 
 	fmt.Println("\nI'm sorting them using tree sort...")
 	treeSort(intlist)
-
 	printList(intlist)
 
 	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("I am generating 5 random numbers...")
+	fmt.Println("I am generating 10 random numbers...")
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
+		intlist.PushFront(rand.Intn(100))
+	}
+	printList(intlist)
+
+	fmt.Println("\nI'm sorting them using bubble sort...")
+	bubbleSort(intlist)
+	printList(intlist)
+
+	fmt.Println("\n")
+	intlist.Init()
+
+	fmt.Println("I am generating 10 random numbers...")
+
+	for i := 0; i < 10; i++ {
+		intlist.PushFront(rand.Intn(100))
+	}
+	printList(intlist)
+
+	fmt.Println("\nI'm sorting them using merge sort...")
+	mergeSort(intlist)
+	printList(intlist)
+
+	fmt.Println("\n")
+	intlist.Init()
+
+	fmt.Println("I am generating 10 random numbers...")
+
+	for i := 0; i < 10; i++ {
 		intlist.PushFront(rand.Intn(100))
 	}
 	printList(intlist)
 
 	fmt.Println("\nI'm sorting them using counting sort...")
 	countingSort(intlist)
-
 	printList(intlist)
 
 	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("I am generating 5 random numbers...")
+	fmt.Println("I am generating 10 random numbers...")
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		intlist.PushFront(rand.Intn(100))
 	}
 	printList(intlist)
 
 	fmt.Println("\nI'm sorting them using insertion sort...")
 	insertionSort(intlist)
-
 	printList(intlist)
 
 	fmt.Println("\n")
 	intlist.Init()
 
-	fmt.Println("I am generating 5 random numbers...")
+	fmt.Println("I am generating 10 random numbers...")
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		intlist.PushFront(rand.Intn(100))
 	}
 	printList(intlist)
 
 	fmt.Println("\nI'm sorting them using bucket sort...")
 	bucketSort(intlist)
-
 	printList(intlist)
 
 	fmt.Println("\n")
+
+ 
+
+	/*
+	=============================
+			EXECUTION TIME
+	=============================
+	*/
+	fmt.Println("\n\n\n\n\n\n\n\n\n")
+	fmt.Println("==============================================")
+	fmt.Println("\tEXECUTION TIME (in ms)")
+	fmt.Println("\tinput of 10000 values in [0, 5000)")
+	fmt.Println("==============================================")
+
+
+
+	timingList := list.New()
+	intlist.Init()
+
+	for i := 0; i < 10000; i++ {
+		intlist.PushFront(rand.Intn(5000))
+	}
+	start := time.Now()
+	selectionSort(intlist)
+	elapsed := time.Since(start)
+	timingList.PushFront(
+		Pair{
+        	method: "selectionSort",
+        	time: elapsed.Milliseconds(),
+    })
+
+
+
+	intlist.Init()
+	for i := 0; i < 10000; i++ {
+		intlist.PushFront(rand.Intn(5000))
+	}
+	start = time.Now()
+	treeSort(intlist)
+	elapsed = time.Since(start)
+	timingList.PushFront(
+		Pair{
+        	method: "treeSort",
+        	time: elapsed.Milliseconds(),
+    })
+
+
+
+	intlist.Init()
+	for i := 0; i < 10000; i++ {
+		intlist.PushFront(rand.Intn(5000))
+	}
+	start = time.Now()
+	bubbleSort(intlist)
+	elapsed = time.Since(start)
+	timingList.PushFront(
+		Pair{
+        	method: "bubbleSort",
+        	time: elapsed.Milliseconds(),
+    })
+	intlist.Init()
+
+
+
+	for i := 0; i < 10000; i++ {
+		intlist.PushFront(rand.Intn(5000))
+	}
+	start = time.Now()
+	mergeSort(intlist)
+	elapsed = time.Since(start)
+	timingList.PushFront(
+		Pair{
+        	method: "mergeSort",
+        	time: elapsed.Milliseconds(),
+    })
+
+	
+
+
+	intlist.Init()
+	for i := 0; i < 10000; i++ {
+		intlist.PushFront(rand.Intn(5000))
+	}
+	start = time.Now()
+	countingSort(intlist)
+	elapsed = time.Since(start)
+	timingList.PushFront(
+		Pair{
+        	method: "countingSort",
+        	time: elapsed.Milliseconds(),
+    })
+
+
+
+	intlist.Init()
+	for i := 0; i < 10000; i++ {
+		intlist.PushFront(rand.Intn(5000))
+	}
+	start = time.Now()
+	insertionSort(intlist)
+	elapsed = time.Since(start)
+	timingList.PushFront(
+		Pair{
+        	method: "insertionSort",
+        	time: elapsed.Milliseconds(),
+    })
+
+
+
+
+	intlist.Init()
+	for i := 0; i < 10000; i++ {
+		intlist.PushFront(rand.Intn(5000))
+	}
+	start = time.Now()
+	bucketSort(intlist)
+	elapsed = time.Since(start)
+	timingList.PushFront(
+		Pair{
+        	method: "bucketSort",
+        	time: elapsed.Milliseconds(),
+    })
+
+
+
+
+
+	for e := timingList.Front(); e != nil; e = e.Next() {
+		fmt.Print(e.Value.(Pair).method)
+		fmt.Print("\t")
+		fmt.Print(e.Value.(Pair).time)
+		fmt.Print(" ms")
+		fmt.Println()
+		fmt.Println("-----------------------------")
+	}
 
 }
