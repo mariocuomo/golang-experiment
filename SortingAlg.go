@@ -341,51 +341,48 @@ func mergeSort_rec(intArray []int, p int, r int) {
 }
 
 func merge(intArray []int, p int, q int, r int){
-	var i=0;
-	var j=0;
-	var k=0;
-	intArray_Support:=make([]int, len(intArray)-p)
 
-	i=p;
-	j=q+1;
+    var s1 = q-p+1;
+    var s2 = r-q;
+    
+    leftArray:=make([]int, s1)
+    rightArray:=make([]int, s2)
+    
+    for i:= 0; i<s1; i++{
+        leftArray[i] = intArray[p + i];
+    }
+    for j:=0; j<s2; j++{
+        rightArray[j] = intArray[q + 1+ j];
+    }
+    
+    
+    var i = 0
+    var j = 0
+    var k = p
 
-	for {
-        if !(i<=q && j<=r) {
-                break
+    for i < s1 && j < s2{
+        if(leftArray[i] <= rightArray[j]){
+            intArray[k] = leftArray[i];
+            i=i+1;
+        }else
+        {
+            intArray[k] = rightArray[j];
+            j=j+1;
         }
-        if intArray[i]<intArray[j] {
-			intArray_Support[k]=intArray[i];
-			i++;
-		} else{
-			intArray_Support[k]=intArray[j];
-			j++;
-		}
-		k++;
-	}
-
-
-	for {
-		if !(i<=q) {
-            break
-        }
-		intArray_Support[k]=intArray[i];
-		i++;
-		k++;
-	}
-
-
-	for {
-		if !(j<=r) {
-            break
-        }
-		intArray_Support[k]=intArray[j];
-		j++;
-		k++;
-	}
-
-	for k=p;k<=r;k++ {
-		intArray[k]=intArray_Support[k-p];
-	}
+        k=k+1;
+    }
+    
+    for i < s1{
+        intArray[k] = leftArray[i];
+        i=i+1;
+        k=k+1;
+    }
+    
+    for j < s2{
+        intArray[k] = rightArray[j];
+        j=j+1;
+        k=k+1;
+    }
 }
 
 
