@@ -1,0 +1,90 @@
+INPUT SIZE: 6143
+bucketSort	2
+insertionSort	32
+countingSort	0
+mergeSort	3
+bubbleSort	65
+treeSort	2
+selectionSort	35
+
+INPUT SIZE: 16318
+bucketSort	8
+insertionSort	225
+countingSort	2
+mergeSort	8
+bubbleSort	474
+treeSort	12
+selectionSort	243
+
+INPUT SIZE: 6475
+bucketSort	1
+insertionSort	37
+countingSort	0
+mergeSort	2
+bubbleSort	72
+treeSort	2
+selectionSort	39
+
+INPUT SIZE: 14087
+bucketSort	5
+insertionSort	170
+countingSort	1
+mergeSort	6
+bubbleSort	354
+treeSort	11
+selectionSort	181
+
+INPUT SIZE: 18068
+bucketSort	8
+insertionSort	279
+countingSort	2
+mergeSort	10
+bubbleSort	581
+treeSort	16
+selectionSort	300
+
+INPUT SIZE: 14370
+bucketSort	5
+insertionSort	173
+countingSort	1
+mergeSort	7
+bubbleSort	368
+treeSort	9
+selectionSort	191
+
+INPUT SIZE: 6187
+bucketSort	1
+insertionSort	32
+countingSort	0
+mergeSort	1
+bubbleSort	67
+treeSort	2
+selectionSort	36
+
+INPUT SIZE: 11000
+bucketSort	3
+insertionSort	103
+countingSort	2
+mergeSort	4
+bubbleSort	213
+treeSort	7
+selectionSort	113
+
+INPUT SIZE: 14864
+bucketSort	6
+insertionSort	185
+countingSort	2
+mergeSort	7
+bubbleSort	392
+treeSort	13
+selectionSort	206
+
+INPUT SIZE: 9794
+bucketSort	2
+insertionSort	82
+countingSort	1
+mergeSort	4
+bubbleSort	169
+treeSort	6
+selectionSort	92
+

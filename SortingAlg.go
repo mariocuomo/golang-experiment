@@ -5,6 +5,10 @@ import (
     "math/rand"
     "time"
     "container/list"
+    "bufio"
+    "os"
+    "log"
+    "strconv"
 )
 
 type Node struct {
@@ -17,6 +21,13 @@ type Pair struct {
     method string
     time int64
 }
+
+type Triple struct {
+	sizeInput int
+    method string
+    time int64
+}
+
 
 /*
 =================================
@@ -492,6 +503,152 @@ func isSorted(intArray []int,sizes int) bool{
 	
 }
 
+func copyList(src *list.List, dst *list.List){
+	dst.Init()
+	
+	for e := src.Front(); e != nil; e = e.Next() {
+		dst.PushBack(e.Value)
+   	}
+}
+
+func createStatsFile(){
+	intlist := list.New()
+	timingList := list.New()
+
+	for i := 0; i < 10; i++ {
+		rand_size := rand.Intn(20000)
+
+		copyIntlist := list.New()
+	
+		intlist.Init()
+		for i := 0; i < rand_size; i++ {
+			x := rand.Intn(5000)
+			intlist.PushFront(x)
+			copyIntlist.PushFront(x)
+		}
+
+
+		start := time.Now()
+		selectionSort(intlist)
+		elapsed := time.Since(start)
+		timingList.PushFront(
+			Triple{
+				sizeInput: rand_size,
+	        	method: "selectionSort",
+	        	time: elapsed.Milliseconds(),
+	    })
+
+
+	    copyList(copyIntlist,intlist)
+
+		start = time.Now()
+		treeSort(intlist)
+		elapsed = time.Since(start)
+		timingList.PushFront(
+			Triple{
+				sizeInput: rand_size,
+	        	method: "treeSort",
+	        	time: elapsed.Milliseconds(),
+	    })
+
+	    copyList(copyIntlist,intlist)
+
+		start = time.Now()
+		bubbleSort(intlist)
+		elapsed = time.Since(start)
+		timingList.PushFront(
+			Triple{
+				sizeInput: rand_size,
+	        	method: "bubbleSort",
+	        	time: elapsed.Milliseconds(),
+	    })
+		
+
+		copyList(copyIntlist,intlist)
+
+
+		start = time.Now()
+		mergeSort(intlist)
+		elapsed = time.Since(start)
+		timingList.PushFront(
+			Triple{
+				sizeInput: rand_size,
+	        	method: "mergeSort",
+	        	time: elapsed.Milliseconds(),
+	    })
+
+		
+
+		copyList(copyIntlist,intlist)
+		
+		start = time.Now()
+		countingSort(intlist)
+		elapsed = time.Since(start)
+		timingList.PushFront(
+			Triple{
+				sizeInput: rand_size,
+	        	method: "countingSort",
+	        	time: elapsed.Milliseconds(),
+	    })
+
+
+
+		copyList(copyIntlist,intlist)
+
+		start = time.Now()
+		insertionSort(intlist)
+		elapsed = time.Since(start)
+		timingList.PushFront(
+			Triple{
+				sizeInput: rand_size,
+	        	method: "insertionSort",
+	        	time: elapsed.Milliseconds(),
+	    })
+
+
+
+
+		copyList(copyIntlist,intlist)
+
+		start = time.Now()
+		bucketSort(intlist)
+		elapsed = time.Since(start)
+		timingList.PushFront(
+			Triple{
+				sizeInput: rand_size,
+	        	method: "bucketSort",
+	        	time: elapsed.Milliseconds(),
+	    })
+	}
+
+	file, err:= os.Create("./stats.txt")
+
+    if err != nil {
+        log.Fatal(err)
+    }
+    writer := bufio.NewWriter(file)
+
+	for e := timingList.Front(); e != nil; e = e.Next() {
+		writer.WriteString("INPUT SIZE: "+strconv.Itoa(e.Value.(Triple).sizeInput)+"\n")
+		writer.WriteString(e.Value.(Triple).method+"\t"+strconv.Itoa(int(e.Value.(Triple).time)) + "\n")
+		e=e.Next()
+		writer.WriteString(e.Value.(Triple).method+"\t"+strconv.Itoa(int(e.Value.(Triple).time)) + "\n")
+		e=e.Next()
+		writer.WriteString(e.Value.(Triple).method+"\t"+strconv.Itoa(int(e.Value.(Triple).time)) + "\n")
+		e=e.Next()
+		writer.WriteString(e.Value.(Triple).method+"\t"+strconv.Itoa(int(e.Value.(Triple).time)) + "\n")
+		e=e.Next()
+		writer.WriteString(e.Value.(Triple).method+"\t"+strconv.Itoa(int(e.Value.(Triple).time)) + "\n")
+		e=e.Next()
+		writer.WriteString(e.Value.(Triple).method+"\t"+strconv.Itoa(int(e.Value.(Triple).time)) + "\n")
+		e=e.Next()
+		writer.WriteString(e.Value.(Triple).method+"\t"+strconv.Itoa(int(e.Value.(Triple).time)) + "\n")
+		writer.WriteString("\n")
+   	}
+   
+    writer.Flush()
+}
+
 
 
 /*
@@ -633,14 +790,17 @@ func main() {
 	fmt.Println("\tinput of 10000 values in [0, 5000)")
 	fmt.Println("==============================================")
 
-
-
 	timingList := list.New()
+	copyIntlist := list.New()
+	
 	intlist.Init()
-
 	for i := 0; i < 10000; i++ {
-		intlist.PushFront(rand.Intn(5000))
+		x := rand.Intn(5000)
+		intlist.PushFront(x)
+		copyIntlist.PushFront(x)
 	}
+
+
 	start := time.Now()
 	selectionSort(intlist)
 	elapsed := time.Since(start)
@@ -651,11 +811,8 @@ func main() {
     })
 
 
+    copyList(copyIntlist,intlist)
 
-	intlist.Init()
-	for i := 0; i < 10000; i++ {
-		intlist.PushFront(rand.Intn(5000))
-	}
 	start = time.Now()
 	treeSort(intlist)
 	elapsed = time.Since(start)
@@ -665,12 +822,8 @@ func main() {
         	time: elapsed.Milliseconds(),
     })
 
+    copyList(copyIntlist,intlist)
 
-
-	intlist.Init()
-	for i := 0; i < 10000; i++ {
-		intlist.PushFront(rand.Intn(5000))
-	}
 	start = time.Now()
 	bubbleSort(intlist)
 	elapsed = time.Since(start)
@@ -679,13 +832,11 @@ func main() {
         	method: "bubbleSort",
         	time: elapsed.Milliseconds(),
     })
-	intlist.Init()
+	
+
+	copyList(copyIntlist,intlist)
 
 
-
-	for i := 0; i < 10000; i++ {
-		intlist.PushFront(rand.Intn(5000))
-	}
 	start = time.Now()
 	mergeSort(intlist)
 	elapsed = time.Since(start)
@@ -697,11 +848,8 @@ func main() {
 
 	
 
-
-	intlist.Init()
-	for i := 0; i < 10000; i++ {
-		intlist.PushFront(rand.Intn(5000))
-	}
+	copyList(copyIntlist,intlist)
+	
 	start = time.Now()
 	countingSort(intlist)
 	elapsed = time.Since(start)
@@ -713,10 +861,8 @@ func main() {
 
 
 
-	intlist.Init()
-	for i := 0; i < 10000; i++ {
-		intlist.PushFront(rand.Intn(5000))
-	}
+	copyList(copyIntlist,intlist)
+
 	start = time.Now()
 	insertionSort(intlist)
 	elapsed = time.Since(start)
@@ -729,10 +875,8 @@ func main() {
 
 
 
-	intlist.Init()
-	for i := 0; i < 10000; i++ {
-		intlist.PushFront(rand.Intn(5000))
-	}
+	copyList(copyIntlist,intlist)
+
 	start = time.Now()
 	bucketSort(intlist)
 	elapsed = time.Since(start)
@@ -754,5 +898,21 @@ func main() {
 		fmt.Println()
 		fmt.Println("-----------------------------")
 	}
+
+
+
+
+
+
+
+
+
+	/*
+	=============================
+		CREATING FILE STATS
+	=============================
+	*/
+	createStatsFile()
+	
 
 }
